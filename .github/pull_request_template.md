@@ -1,21 +1,21 @@
-🚀 Pull Request
+### :rocket: Pull Request
 
-📄 개요
-
-
-⚠️ 주의사항
+#### :page_facing_up: 개요
 
 
-📋 작업 목록
+#### :warning: 주의사항
 
 
-💡 테스트
+#### :clipboard: 작업 목록
 
 
-📷 API 설계
+#### :bulb: 테스트
 
 
-🔍 관련 이슈
+#### :camera: API 설계
 
 
-📝 기타 정보
+#### :mag: 관련 이슈
+
+
+#### :memo: 기타 정보
