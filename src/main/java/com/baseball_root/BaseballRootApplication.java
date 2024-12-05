@@ -1,6 +1,7 @@
 package com.baseball_root;
 
 import com.baseball_root.global.WeatherCrawler;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.IOException;
@@ -8,8 +9,10 @@ import java.io.IOException;
 
 @SpringBootApplication
 public class BaseballRootApplication {
-        public static void main(String[] args) throws IOException {
-            int a[][];
+    public static void main(String[] args) {
+        SpringApplication.run(BaseballRootApplication.class);
+
+        int a[][];
         // KBO
 //		WebCrawler webCrawler = new WebCrawler();
 //		List<ScheduleDto> scheduleDtoList = webCrawler.scrapeSchedule("2024", "07");
