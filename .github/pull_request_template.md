@@ -1,12 +1,9 @@
 ### :rocket: Pull Request
 
-#### :page_facing_up: 개요
+#### :page_facing_up: 작업 목록
 
 
 #### :warning: 주의사항
-
-
-#### :clipboard: 작업 목록
 
 
 #### :bulb: 테스트
