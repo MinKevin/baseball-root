@@ -37,15 +37,15 @@ public class MemberService {
         return member.toResponseDto();
     }
 
+    public void delete(String id) {
+        memberRepository.deleteById(id);
+    }
+
     private String makeUuid() {
         String uuid = UUID.randomUUID().toString().substring(0, 8);
         while (memberRepository.findById(uuid).isPresent()) {
             uuid = UUID.randomUUID().toString().substring(0, 8);
         }
         return uuid;
-    }
-
-    public void delete(String id) {
-        memberRepository.deleteById(id);
     }
 }
