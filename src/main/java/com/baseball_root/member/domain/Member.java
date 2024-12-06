@@ -15,6 +15,12 @@ public class Member {
     private String favoriteTeam;
     private String profileImage;
 
+    public void update(MemberDto.Request memberRequestDto) {
+        this.nickname = memberRequestDto.getNickname();
+        this.favoriteTeam = memberRequestDto.getFavoriteTeam();
+        this.profileImage = memberRequestDto.getProfileImage();
+    }
+
     public MemberDto.Response toResponseDto() {
         return MemberDto.Response.builder()
                 .id(id)

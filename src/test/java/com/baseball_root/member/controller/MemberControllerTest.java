@@ -18,6 +18,7 @@ import org.springframework.web.context.WebApplicationContext;
 import java.nio.charset.Charset;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
@@ -47,11 +48,13 @@ class MemberControllerTest {
 
     @Test
     void 회원_정보_추가() throws Exception {
+        // given
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("nickname", "test_nickname");
         jsonObject.put("favorite_team", "test_favorite_team");
         jsonObject.put("profile_image", "test_profile_image");
 
+        // when
         MvcResult mvcResult = mockMvc.perform(
                         post(prefix + "/members")
                                 .content(jsonObject.toJSONString())
@@ -60,11 +63,52 @@ class MemberControllerTest {
                 ).andDo(print())
                 .andReturn();
 
+        // then
         for (String key : jsonObject.keySet()) {
             assertEquals(
                     jsonObject.get(key),
                     JsonPath.parse(mvcResult.getResponse().getContentAsString()).read("$.data." + key)
-                    );
+            );
         }
     }
+
+    @Test
+    void 회원_정보_수정() throws Exception {
+        // given
+        JSONObject newMemberInfo = new JSONObject();
+        newMemberInfo.put("nickname", "test_nickname");
+        newMemberInfo.put("favorite_team", "test_favorite_team");
+        newMemberInfo.put("profile_image", "test_profile_image");
+
+        MvcResult mvcResult = mockMvc.perform(
+                post(prefix + "/members")
+                        .content(newMemberInfo.toJSONString())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+        ).andReturn();
+
+        String memberId = JsonPath.parse(mvcResult.getResponse().getContentAsString()).read("$.data." + "id");
+        JSONObject updateMemberInfo = new JSONObject();
+        updateMemberInfo.put("nickname", "updated_nickname");
+        updateMemberInfo.put("favorite_team", "updated_favorite_team");
+        updateMemberInfo.put("profile_image", "updated_profile_image");
+
+        // when
+        mvcResult = mockMvc.perform(
+                        patch(prefix + "/members?id=" + memberId)
+                                .content(updateMemberInfo.toJSONString())
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .accept(MediaType.APPLICATION_JSON)
+                ).andDo(print())
+                .andReturn();
+
+        // then
+        for (String key : updateMemberInfo.keySet()) {
+            assertEquals(
+                    updateMemberInfo.get(key),
+                    JsonPath.parse(mvcResult.getResponse().getContentAsString()).read("$.data." + key)
+            );
+        }
+    }
+
 }
