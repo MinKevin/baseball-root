@@ -1,5 +1,6 @@
 package com.baseball_root.member.controller;
 
+import com.baseball_root.global.SuccessCode;
 import com.baseball_root.global.response.ApiResponse;
 import com.baseball_root.global.response.ResponseUtil;
 import com.baseball_root.member.dto.MemberDto;
@@ -25,5 +26,12 @@ public class MemberController {
         MemberDto.Response memberResponseDto = memberService.update(id, memberRequestDto);
 
         return ResponseUtil.ok(memberResponseDto);
+    }
+
+    @DeleteMapping
+    public ApiResponse<?> delete(@RequestParam(name = "id") String id) {
+        memberService.delete(id);
+
+        return ResponseUtil.ok(SuccessCode.DELETE_MEMBER_SUCCESS);
     }
 }
